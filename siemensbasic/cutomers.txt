@@ -1,0 +1,4 @@
+1,osman,yay,47
+2,nil,yayci,40
+3,nehir,yaycioglu,11
+4,su,yaycioglu,6

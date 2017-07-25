@@ -3,12 +3,24 @@ package com.training.spring;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 @Component("kisi")
 @Scope("prototype")
+@XmlRootElement
 public class Person {
 
     private String name;
     private String phone;
+    private int    age;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public String getName() {
         return name;

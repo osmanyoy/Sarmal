@@ -9,7 +9,6 @@ import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 
 @Configuration
-@ConditionalOnBean
 @PropertySource("classpath:core.properties")
 public class MyConfiguration {
 
