@@ -1,6 +1,6 @@
 package com.training.spring;
 
-import com.training.spring.customer.Customer;
+import com.training.spring.customer.*;
 import com.training.spring.data.CustomerCustomRepository;
 import com.training.spring.data.CustomerRepository;
 import edu.ytu.TestObj;
@@ -14,6 +14,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 // @SpringBootApplication(scanBasePackages = {"edu.ytu","com.training.spring"})
 @SpringBootApplication
@@ -104,14 +108,44 @@ public class SiemensbasicApplication implements ApplicationRunner {
 		customer.setSurname("yay");
 		customer.setAge(47);
 
-		customerCustomRepository.save2(customer);
+		customer.setPassword("osman12");
+		customer.setUsername("osman");
 
+		Adress adress = new Adress();
+		adress.setCity("Adana");
+		adress.setPostalcode(100101);
+		adress.setStreetName("Atatürk");
+		adress.setTown("Ceyhan");
+
+		customer.setAdress(adress);
+
+		PersonalData personalData = new PersonalData();
+
+		personalData.setIdentityNumber("" + UUID.randomUUID());
+		personalData.setSpouseName("Ayşe");
+
+		customer.setPersonalData(personalData);
+		// personalData.setCustomer(customer);
+
+
+		List<Account> accounts = new ArrayList<>();
+		accounts.add(new Account().setAccountName("osmanA").setAccountType(EAccountType.TL).setBalance(100).setCustomer(customer));
+		accounts.add(new Account().setAccountName("osmanB").setAccountType(EAccountType.DOLAR).setBalance(100).setCustomer(customer));
+		accounts.add(new Account().setAccountName("osmanC").setAccountType(EAccountType.EURO).setBalance(100).setCustomer(customer));
+
+		customer.setAccounts(accounts);
+
+		// customerCustomRepository.save2(customer);
+
+		// customerRepository.save(customer);
+
+		// customer.setAge(57);
 		customerRepository.save(customer);
 
-		customer.setAge(57);
-		customerRepository.save(customer);
+		// System.out.println(customer.getPassword());
 
-
-
+		List<Customer> customerList = customerRepository.testMyQuery(47,
+																	 "osman");
+		System.out.println(customerList);
 	}
 }

@@ -22,4 +22,9 @@ public class FileCustomerDAO implements ICustomerDAO {
         }
         return customerList;
     }
+
+    @Override
+    public void createCustomer(Customer customer) {
+
+    }
 }

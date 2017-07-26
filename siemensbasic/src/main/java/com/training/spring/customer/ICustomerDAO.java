@@ -7,4 +7,6 @@ import java.util.List;
  */
 public interface ICustomerDAO {
     List<Customer> getAllCustomers();
+
+    void createCustomer(Customer customer);
 }
