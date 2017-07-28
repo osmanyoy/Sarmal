@@ -20,4 +20,13 @@ public class DBCustomerDAO implements ICustomerDAO{
         customerRepository.save(customer);
     }
 
+    @Override
+    public Customer getCustomerByUserName(String s) {
+        List<Customer> allByUsername = customerRepository.findAllByUsername(s);
+        if (allByUsername == null || allByUsername.size() == 0){
+            return null;
+        }
+        return allByUsername.get(0);
+    }
+
 }

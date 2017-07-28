@@ -27,4 +27,9 @@ public class FileCustomerDAO implements ICustomerDAO {
     public void createCustomer(Customer customer) {
 
     }
+
+    @Override
+    public Customer getCustomerByUserName(String s) {
+        return null;
+    }
 }

@@ -1,6 +1,9 @@
 package com.training.spring.customer;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class Account {
@@ -15,6 +18,8 @@ public class Account {
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "customer_id")
+    @JsonIgnore
+    @XmlTransient
     private Customer customer;
 
     public Customer getCustomer() {

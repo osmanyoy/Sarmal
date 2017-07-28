@@ -45,6 +45,9 @@ public interface CustomerRepository extends JpaRepository<Customer,Long>{
 
     List<Customer> testMyQuery(int age,String name);
 
+    List<Customer> findAllByUsername(String username);
+
+
 
 
 }

@@ -1,6 +1,10 @@
 package com.training.spring.customer;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class PersonalData {
@@ -8,6 +12,10 @@ public class PersonalData {
     @Id
     private String identityNumber;
     private String spouseName;
+
+    @JsonBackReference
+    @JsonIgnore
+    @XmlTransient
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "customer_id",foreignKey = @ForeignKey(name = "customer_id_key",value = ConstraintMode.NO_CONSTRAINT ))
     private Customer customer;

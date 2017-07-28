@@ -9,4 +9,6 @@ public interface ICustomerDAO {
     List<Customer> getAllCustomers();
 
     void createCustomer(Customer customer);
+
+    Customer getCustomerByUserName(String s);
 }

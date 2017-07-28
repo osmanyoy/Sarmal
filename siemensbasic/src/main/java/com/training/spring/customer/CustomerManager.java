@@ -26,4 +26,8 @@ public class CustomerManager {
     public void createCustomer(Customer customer) {
         customerDAO.createCustomer(customer);
     }
+
+    public Customer getCustomerByUserName(String s) {
+        return customerDAO.getCustomerByUserName(s);
+    }
 }
