@@ -8,7 +8,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 public class RabbitReceiver {
 
     @RabbitHandler
-    public void handleMessage(String str){
+    public void handleMessage(String str) {
         System.out.println("I received : " + str);
     }
 }

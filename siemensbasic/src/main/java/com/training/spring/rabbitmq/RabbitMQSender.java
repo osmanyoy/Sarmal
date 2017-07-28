@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Schedules;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 
@@ -15,9 +16,19 @@ public class RabbitMQSender {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @Scheduled(fixedDelay = 10000)
+    private int index = 1;
+
+    @Scheduled(fixedDelay = 2000)
     public void sendPeriodicMessage(){
-        rabbitTemplate.convertAndSend("siemens.exchange","siemens.routing.bir","Test");
+        Random random = new Random();
+        int nextInt = random.nextInt(100000);
+        if (nextInt % 2 == 0){
+            rabbitTemplate.convertAndSend("siemens.exchange","siemens.routing.bir","Test " + index++);
+
+        } else {
+            rabbitTemplate.convertAndSend("siemens.exchange","osman.yay","Second Test " + index++);
+
+        }
         System.out.println("sent");
         //        final Customer customer = new Customer();
         //        customer.setName("osman");
