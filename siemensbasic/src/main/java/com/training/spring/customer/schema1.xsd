@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:complexType name="customer">
+    <xs:sequence>
+      <xs:element name="accounts" type="account" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="adress" type="adress" minOccurs="0"/>
+      <xs:element name="age" type="xs:int"/>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="password" type="xs:string" minOccurs="0"/>
+      <xs:element name="personalData" type="personalData" minOccurs="0"/>
+      <xs:element name="surname" type="xs:string" minOccurs="0"/>
+      <xs:element name="username" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="account">
+    <xs:sequence>
+      <xs:element name="accountName" type="xs:string" minOccurs="0"/>
+      <xs:element name="accountType" type="eAccountType" minOccurs="0"/>
+      <xs:element name="balance" type="xs:double"/>
+      <xs:element name="customer" type="customer" minOccurs="0"/>
+      <xs:element name="id" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="adress">
+    <xs:sequence>
+      <xs:element name="city" type="xs:string" minOccurs="0"/>
+      <xs:element name="postalcode" type="xs:int"/>
+      <xs:element name="streetName" type="xs:string" minOccurs="0"/>
+      <xs:element name="town" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="personalData">
+    <xs:sequence>
+      <xs:element name="customer" type="customer" minOccurs="0"/>
+      <xs:element name="identityNumber" type="xs:string" minOccurs="0"/>
+      <xs:element name="spouseName" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="eAccountType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="TL"/>
+      <xs:enumeration value="DOLAR"/>
+      <xs:enumeration value="EURO"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+
