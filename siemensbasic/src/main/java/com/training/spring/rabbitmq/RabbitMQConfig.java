@@ -63,7 +63,7 @@ public class RabbitMQConfig {
                      TopicExchange exchange) {
         return BindingBuilder.bind(secondQueue)
                              .to(exchange)
-                             .with("siemens.*");
+                             .with("osman.*");
     }
 
     @Bean
@@ -80,16 +80,16 @@ public class RabbitMQConfig {
     }
 
 
-    //    @Bean
-    //    public SimpleMessageListenerContainer listenerContainer() {
-    //        SimpleMessageListenerContainer listenerContainer = new SimpleMessageListenerContainer();
-    //        listenerContainer.setConnectionFactory(connectionFactory());
-    //        listenerContainer.setQueues(simpleQueue());
-    //        listenerContainer.setMessageConverter(jsonMessageConverter());
-    //        listenerContainer.setMessageListener(new RabbitConsumer());
-    //        listenerContainer.setAcknowledgeMode(AcknowledgeMode.AUTO);
-    //        return listenerContainer;
-    //    }
+    @Bean
+    public SimpleMessageListenerContainer listenerContainer() {
+        SimpleMessageListenerContainer listenerContainer = new SimpleMessageListenerContainer();
+        listenerContainer.setConnectionFactory(connectionFactory());
+        listenerContainer.setQueues(simpleQueue());
+        listenerContainer.setMessageConverter(jsonMessageConverter());
+        listenerContainer.setMessageListener(new RabbitConsumer());
+        listenerContainer.setAcknowledgeMode(AcknowledgeMode.AUTO);
+        return listenerContainer;
+    }
 
     @Bean
     public RabbitMQSender rabbitMQSender() {
