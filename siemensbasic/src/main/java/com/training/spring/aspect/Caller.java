@@ -10,6 +10,8 @@ public class Caller {
     public void callCalled(){
         String hello = called.hello("osman");
         System.out.println("Result : " + hello);
+
+        called.hello2("ayşe");
     }
 
 }

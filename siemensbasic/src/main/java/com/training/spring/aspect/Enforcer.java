@@ -51,7 +51,7 @@ public class Enforcer {
 //        return null;
 //    }
 
-    @Around(value ="@within(com.training.spring.aspect.*) && @annotation(sec)")
+    @Around(value ="within(com.training.spring.aspect.*) && @annotation(sec)")
     public Object aroundMethod(ProceedingJoinPoint proceedingJoinPoint,Security sec){
         try {
             Object proceed = proceedingJoinPoint.proceed();
