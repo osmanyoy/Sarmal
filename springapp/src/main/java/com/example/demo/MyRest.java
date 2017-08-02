@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.integration.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.metrics.CounterService;
 import org.springframework.boot.actuate.metrics.GaugeService;
@@ -64,6 +65,16 @@ public class MyRest {
                             counter);
         this.counterService.increment(SIEMENS_FIRST_COUNTER);
         return "Hello world 5";
+    }
+
+    @RequestMapping(value = "/person",method = RequestMethod.POST)
+    public Person person() {
+        Person person = new Person();
+        person.setName("osi");
+        person.setSurname("mosi");
+        person.setAge(45);
+        return person;
+
     }
 
     @RequestMapping(path = "/hello2/{name}", method = RequestMethod.PUT,  produces = {"application/json",

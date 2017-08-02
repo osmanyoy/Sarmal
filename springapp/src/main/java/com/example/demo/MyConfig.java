@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.context.event.SimpleApplicationEventMulticaster;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.servlet.DispatcherType;
 import java.util.ArrayList;
@@ -13,6 +15,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 @Configuration
+@EnableAsync
+@EnableScheduling
 public class MyConfig {
 
     @Bean
@@ -41,5 +45,12 @@ public class MyConfig {
         simpleApplicationEventMulticaster.setTaskExecutor(executor());
         return simpleApplicationEventMulticaster;
     }
+
+
+    @Bean
+    public AsyncTest asyncTest(){
+        return new AsyncTest();
+    }
+
 }
 

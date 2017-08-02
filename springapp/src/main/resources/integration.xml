@@ -3,11 +3,17 @@
        xmlns:int="http://www.springframework.org/schema/integration"
        xmlns:task="http://www.springframework.org/schema/task"
        xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:int-http="http://www.springframework.org/schema/integration/http"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
-		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+    	http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
+        http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd">
     <bean id="myEndpoint" class="com.example.demo.integration.MyEndpoit" />
     <bean id="myprintservice" class="com.example.demo.integration.PrintService" />
     <bean id="myprintservicereverse" class="com.example.demo.integration.PrintServiceReverse" />
@@ -25,5 +31,76 @@
     <int:service-activator input-channel="mysecondchannel" ref="myprintservicereverse" method="print" />
 
     <int:gateway default-request-channel="myfirstchannel" service-interface="com.example.demo.integration.IMyGateway" />
+
+    <bean id="oddService" class="com.example.demo.integration.OddService" />
+    <bean id="evenService" class="com.example.demo.integration.EvenService" />
+
+    <int:channel id="personChannel"/>
+    <int:gateway default-request-channel="personChannel"
+                 service-interface="com.example.demo.integration.IPersonGateway"
+                 async-executor="executor1"/>
+
+    <int:channel id="evenChannel" >
+        <int:queue capacity="100" />
+    </int:channel>
+    <int:channel id="oddChannel" />
+
+    <int:service-activator input-channel="evenChannel" ref="evenService" method="yaz">
+        <int:poller task-executor="executor1"
+                    fixed-delay="1000"
+                    time-unit="MILLISECONDS"
+                    max-messages-per-poll="2">
+        </int:poller>
+    </int:service-activator>
+    <int:service-activator input-channel="oddChannel" ref="oddService" method="yaz"/>
+
+    <int:chain input-channel="personChannel" >
+        <int:enricher >
+            <int:property name="routingTime" expression="T(System).currentTimeMillis()" />
+        </int:enricher>
+        <int:recipient-list-router >
+            <int:recipient channel="evenChannel" selector-expression="payload.age % 2 == 0" />
+            <int:recipient channel="oddChannel" selector-expression="payload.age % 2 != 0" />
+        </int:recipient-list-router>
+
+    </int:chain>
+
+
+    <int:gateway id="requestGateway"
+                 service-interface="com.example.demo.integration.IHTTPRequestGateway"
+                 default-request-channel="httpChannel"/>
+
+    <int:channel id="httpChannel" />
+
+    <int-http:outbound-gateway request-channel="httpChannel"
+                               url="http://127.0.0.1:9091/person"
+                               http-method="POST"
+                               expected-response-type="java.lang.String" reply-channel="replyHttpChannel">
+    </int-http:outbound-gateway>
+
+    <int:channel id="replyHttpChannel" />
+
+
+    <int:gateway default-request-channel="amqpOutputChannel"
+                 service-interface="com.example.demo.integration.IPersonAMQPGateway"
+                 async-executor="executor1"/>
+
+    <int:channel id="amqpOutputChannel" />
+
+    <int-amqp:outbound-channel-adapter amqp-template="amqpTemplate" channel="amqpOutputChannel" exchange-name="myExchange" routing-key="si.test.send" />
+
+    <rabbit:connection-factory id="connectionFactory" username="osman" password="osman12" host="localhost" />
+
+    <rabbit:template id="amqpTemplate" connection-factory="connectionFactory" mandatory="true"/>
+
+    <rabbit:admin connection-factory="connectionFactory" />
+
+    <rabbit:queue name="si.person.queue" />
+
+    <rabbit:topic-exchange name="myExchange">
+        <rabbit:bindings>
+            <rabbit:binding pattern="si.test.*" queue="si.person.queue"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
 
 </beans>
