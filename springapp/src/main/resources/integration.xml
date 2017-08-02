@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd">
+    <bean id="myEndpoint" class="com.example.demo.integration.MyEndpoit" />
+    <bean id="myprintservice" class="com.example.demo.integration.PrintService" />
+    <bean id="myprintservicereverse" class="com.example.demo.integration.PrintServiceReverse" />
+
+    <int:publish-subscribe-channel id="myfirstchannel" task-executor="executor1"/>
+
+    <int:channel id="mysecondchannel" />
+
+    <task:executor id="executor1" pool-size="10" queue-capacity="10" />
+
+    <int:service-activator input-channel="myfirstchannel" ref="myprintservice" method="print" output-channel="mysecondchannel" />
+
+    <int:service-activator input-channel="myfirstchannel" ref="myprintservicereverse" method="print" />
+
+    <int:service-activator input-channel="mysecondchannel" ref="myprintservicereverse" method="print" />
+
+    <int:gateway default-request-channel="myfirstchannel" service-interface="com.example.demo.integration.IMyGateway" />
+
+</beans>
