@@ -22,7 +22,7 @@
 
     <int:channel id="mysecondchannel" />
 
-    <task:executor id="executor1" pool-size="10" queue-capacity="10" />
+    <task:executor id="executor1" pool-size="20" queue-capacity="10000" />
 
     <int:service-activator input-channel="myfirstchannel" ref="myprintservice" method="print" output-channel="mysecondchannel" />
 
@@ -66,19 +66,52 @@
     </int:chain>
 
 
+    <int:channel id="reply.channel">
+        <int:queue capacity="10" />
+    </int:channel>
+
+   <!-- <int:router ref="myCustomRouter" input-channel="reply.channel"/> -->
+
+    <bean id="myCustomRouter" class="com.example.demo.integration.CustomRouter" />
+
+
+    <int:json-to-object-transformer input-channel="reply.channel" type="com.example.demo.integration.Person" output-channel="reply.channel2" >
+        <int:poller fixed-delay="100" time-unit="MILLISECONDS" max-messages-per-poll="10" task-executor="executor1"/>
+    </int:json-to-object-transformer>
+
+    <int:channel id="reply.channel2">
+        <int:interceptors>
+            <bean id="myCustom" class="com.example.demo.integration.ChannelIntercept" />
+        </int:interceptors>
+    </int:channel>
+
+    <bean id="httpReplyListener" class="com.example.demo.integration.HttpReplyListener" />
+
+    <int:service-activator id="sid1" input-channel="reply.channel2" method="receiveMessage" ref="httpReplyListener">
+    </int:service-activator>
+    <int:channel id="get.request.channel"/>
+
+    <int-http:outbound-gateway id="outbound.gateway"
+                               request-channel="get.request.channel" url="http://localhost:9091/person"
+                               http-method="GET" expected-response-type="java.lang.String"
+                               charset="UTF-8" reply-timeout="1000" reply-channel="reply.channel">
+    </int-http:outbound-gateway>
+
     <int:gateway id="requestGateway"
                  service-interface="com.example.demo.integration.IHTTPRequestGateway"
-                 default-request-channel="httpChannel"/>
+                 default-request-channel="httpChannel" />
 
     <int:channel id="httpChannel" />
 
-    <int-http:outbound-gateway request-channel="httpChannel"
-                               url="http://127.0.0.1:9091/person"
-                               http-method="POST"
-                               expected-response-type="java.lang.String" reply-channel="replyHttpChannel">
-    </int-http:outbound-gateway>
+    <!--<int-http:outbound-gateway request-channel="httpChannel"-->
+                               <!--url="http://127.0.0.1:9091/person"-->
+                               <!--http-method="POST"-->
+                               <!--expected-response-type="java.lang.String">-->
+    <!--</int-http:outbound-gateway>-->
 
-    <int:channel id="replyHttpChannel" />
+    <int:channel id="replyHttpChannel" >
+        <int:queue capacity="100" />
+    </int:channel>
 
 
     <int:gateway default-request-channel="amqpOutputChannel"
@@ -87,11 +120,27 @@
 
     <int:channel id="amqpOutputChannel" />
 
-    <int-amqp:outbound-channel-adapter amqp-template="amqpTemplate" channel="amqpOutputChannel" exchange-name="myExchange" routing-key="si.test.send" />
+    <int-amqp:outbound-channel-adapter
+            amqp-template="amqpTemplate"
+            channel="amqpOutputChannel"
+            exchange-name="myExchange"
+            routing-key="si.test.send" />
+
+
+
+    <int:channel id="fromRabbit" />
+
+    <int-amqp:inbound-channel-adapter channel="fromRabbit" mapped-request-headers="*"
+                                      queue-names="si.person.queue"
+                                      connection-factory="connectionFactory"  />
+
+    <int:service-activator ref="receiveBean" method="onMessage" input-channel="fromRabbit"/>
+
+    <bean id="receiveBean" class="com.example.demo.integration.AMQPRequestListener" />
 
     <rabbit:connection-factory id="connectionFactory" username="osman" password="osman12" host="localhost" />
 
-    <rabbit:template id="amqpTemplate" connection-factory="connectionFactory" mandatory="true"/>
+    <rabbit:template id="amqpTemplate" connection-factory="connectionFactory" mandatory="true" retry-template="retryTemplate"/>
 
     <rabbit:admin connection-factory="connectionFactory" />
 
@@ -102,5 +151,15 @@
             <rabbit:binding pattern="si.test.*" queue="si.person.queue"></rabbit:binding>
         </rabbit:bindings>
     </rabbit:topic-exchange>
+
+    <bean id="retryTemplate" class="org.springframework.retry.support.RetryTemplate">
+        <property name="backOffPolicy">
+            <bean class="org.springframework.retry.backoff.ExponentialBackOffPolicy">
+                <property name="initialInterval" value="500" />
+                <property name="multiplier" value="10.0" />
+                <property name="maxInterval" value="10000" />
+            </bean>
+        </property>
+    </bean>
 
 </beans>

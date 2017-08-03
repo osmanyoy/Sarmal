@@ -12,6 +12,8 @@ import org.springframework.amqp.support.converter.JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.retry.backoff.ExponentialBackOffPolicy;
+import org.springframework.retry.support.RetryTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Configuration
@@ -75,6 +77,13 @@ public class RabbitMQConfig {
     public RabbitTemplate rabbitTemplate() {
         RabbitTemplate template = new RabbitTemplate(connectionFactory());
         template.setRoutingKey("osman.test");
+        RetryTemplate retryTemplate = new RetryTemplate();
+        ExponentialBackOffPolicy exponentialBackOffPolicy = new ExponentialBackOffPolicy();
+        exponentialBackOffPolicy.setInitialInterval(1000);
+        exponentialBackOffPolicy.setMaxInterval(10000);
+        exponentialBackOffPolicy.setMultiplier(4);
+        retryTemplate.setBackOffPolicy(exponentialBackOffPolicy);
+        template.setRetryTemplate(retryTemplate);
         template.setMessageConverter(jsonMessageConverter());
         return template;
     }

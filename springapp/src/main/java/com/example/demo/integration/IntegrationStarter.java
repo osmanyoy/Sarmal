@@ -7,9 +7,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.integration.channel.DirectChannel;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHandler;
-import org.springframework.messaging.MessagingException;
+import org.springframework.messaging.*;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.messaging.support.MessageBuilder;
 
@@ -17,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.example.demo"})
 public class IntegrationStarter implements ApplicationRunner {
 
     //    @Autowired
@@ -31,10 +29,18 @@ public class IntegrationStarter implements ApplicationRunner {
     private IPersonGateway personGateway;
 
     @Autowired
-    private IHTTPRequestGateway            requestGateway;
+    private IHTTPRequestGateway requestGateway;
 
     @Autowired
     private IPersonAMQPGateway personAMQPGateway;
+
+    @Autowired
+    @Qualifier("reply.channel")
+    private PollableChannel receivedChannel;
+
+    @Autowired
+    @Qualifier("get.request.channel")
+    private MessageChannel  getRequestChannel;
 
 
     public static void main(String[] args) {
@@ -43,7 +49,13 @@ public class IntegrationStarter implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
-        // String personJson = requestGateway.sendRequest();
+        // requestGateway.sendRequest();
+//        Message<?> message = MessageBuilder.withPayload("")
+//                                           .build();
+//        getRequestChannel.send(message);
+//        Message<?> receivedMsg = receivedChannel.receive();
+//        String serverMsg = (String) receivedMsg.getPayload();
+//        System.out.println(serverMsg.toString());
 
 
         Person person = new Person();

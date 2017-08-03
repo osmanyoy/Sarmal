@@ -1,13 +1,24 @@
 package com.example.demo.integration;
 
-/**
- * Created by Osman on 2.08.2017.
- */
-public class Person {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+@NamedQueries({@NamedQuery(query = "select u from Person u", name = "Person.findAllCustom")})
+@Entity
+public class Person implements Serializable {
+    @Id
+    @GeneratedValue
+    private long   id;
+    private String username;
+    private String password;
+    private String role;
     private String name;
     private String surname;
-    private int age;
-    private long routingTime;
+    private int    age;
+    private long   routingTime;
 
     public String getName() {
         return name;
@@ -44,5 +55,45 @@ public class Person {
 
     public void setRoutingTime(long routingTime) {
         this.routingTime = routingTime;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+
+    private static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    @PrePersist
+    public void persist(){
+        password = passwordEncoder.encode(password);
     }
 }

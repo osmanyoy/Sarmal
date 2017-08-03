@@ -7,6 +7,8 @@ import org.springframework.boot.actuate.metrics.GaugeService;
 import org.springframework.boot.actuate.metrics.Metric;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,7 @@ import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MyRest {
 
     private static final String SIEMENS_FIRST_COUNTER = "siemens.first.counter";
@@ -48,7 +51,9 @@ public class MyRest {
         return "hello : " + str;
     }
 
-    @MySecurity(role="ADMIN")
+    @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("#oauth2.hasScope('read')")
+    // @MySecurity(role="ADMIN")
     @RequestMapping("/hello")
     public String hello(HttpServletRequest servletRequest, HttpServletResponse servletResponse, Principal principal) {
         int counter = mCount.incrementAndGet();
@@ -67,7 +72,7 @@ public class MyRest {
         return "Hello world 5";
     }
 
-    @RequestMapping(value = "/person",method = RequestMethod.POST)
+    @RequestMapping(value = "/person",method = RequestMethod.GET)
     public Person person() {
         Person person = new Person();
         person.setName("osi");
