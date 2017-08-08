@@ -1,0 +1,4 @@
+1,osman,yay,47
+2,nil,yay,40
+3,nehir,yay,11
+4,su,yay,6

@@ -12,15 +12,14 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
 	@Override
 	public void configureMessageBroker(final MessageBrokerRegistry config) {
-		// config.enableSimpleBroker("/topic");
+//		config.enableSimpleBroker("/topic","/queue");
 		config.enableStompBrokerRelay("/topic",
 		                              "/queue")
 		      .setSystemLogin("osman")
 		      .setSystemPasscode("osman12")
-		      .setClientLogin("osman")
-		      .setClientPasscode("osman12")
 		      .setAutoStartup(true);
 		config.setApplicationDestinationPrefixes("/app");
+
 	}
 
 	@Override

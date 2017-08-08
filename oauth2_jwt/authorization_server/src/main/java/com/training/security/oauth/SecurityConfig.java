@@ -15,21 +15,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(@Autowired AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("user")
-                .password("password")
-                .roles("USER");
+            .withUser("user")
+            .password("password")
+            .roles("USER")
+            .and()
+            .withUser("osman")
+            .password("osman12")
+            .roles("ADMIN");
     }
 
     @Override
     @Order(-20)
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin().permitAll()
-                .and()
-                .requestMatchers()
-                .antMatchers("/", "/login", "/oauth/authorize", "/oauth/confirm_access")
-                .and()
-                .authorizeRequests()
-                .anyRequest()
-                .authenticated();
+        http.formLogin()
+            .permitAll()
+            .and()
+            .requestMatchers()
+            .antMatchers("/",
+                         "/login",
+                         "/oauth/authorize",
+                         "/oauth/confirm_access")
+            .and()
+            .authorizeRequests()
+            .anyRequest()
+            .authenticated();
     }
 }

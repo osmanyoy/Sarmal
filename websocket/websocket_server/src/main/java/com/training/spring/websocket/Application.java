@@ -18,7 +18,7 @@ public class Application implements ApplicationRunner {
 	@Autowired
 	private SimpMessagingTemplate messaging;
 
-	@Scheduled(fixedRate = 10000)
+	@Scheduled(fixedRate = 1000,initialDelay = 10000)
 	public void sendRandomPerson() {
 		final HelloMessage helloMessage = new HelloMessage();
 		helloMessage.setName("test " + this.index++);
