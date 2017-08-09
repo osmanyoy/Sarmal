@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class FileCustomerDAO implements ICutomerDAO{
+public class FileCustomerDAO extends AbstractCustomerDAO{
 
     @Override
     public List<Customer> getAllCustomers() {
@@ -26,6 +26,11 @@ public class FileCustomerDAO implements ICutomerDAO{
             ex.printStackTrace();
         }
         return customerList;
+    }
+
+    @Override
+    public boolean createCustomer(Customer customer) {
+        return false;
     }
 
 }

@@ -1,18 +1,31 @@
 package com.example.demo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Base64;
 
 @Entity
+@Table(name = "employee_tablosu",indexes = {@Index(unique = false,name = "myIndex",columnList = "isim")})
+@SecondaryTable(name = "employee_credential")
 public class Employee {
     @Id
     @GeneratedValue
     private long employeeId;
+    @Column(name = "isim",length = 50,nullable = false,unique = false)
     private String name;
+    @Column(name = "soyisim",nullable = true)
     private String surname;
     private int age;
+
+    @Column(table = "employee_credential")
+    private String username;
+    @Column(table = "employee_credential")
+    private String password;
+
+
+    @Embedded
+    @AttributeOverrides({@AttributeOverride(column = @Column(name = "uzunluk"),name = "height")})
+    // @Transient
+    private PersonalData personalData;
 
     public String getName() {
         return name;
@@ -50,5 +63,44 @@ public class Employee {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public PersonalData getPersonalData() {
+        return personalData;
+    }
+
+    public void setPersonalData(PersonalData personalData) {
+        this.personalData = personalData;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+    @PrePersist
+    @PreUpdate
+    public void yazmadanOnce(){
+        password = new String(Base64.getEncoder().encode(password.getBytes()));
+    }
+
+    @PostLoad
+    @PostUpdate
+    @PostPersist
+    public void yazdiktanSonra(){
+        password = new String(Base64.getDecoder().decode(password.getBytes()));
+
     }
 }

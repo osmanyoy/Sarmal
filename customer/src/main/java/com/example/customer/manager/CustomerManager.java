@@ -3,7 +3,6 @@ package com.example.customer.manager;
 import com.example.customer.Customer;
 import com.example.customer.dao.ICutomerDAO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.PostConstruct;
@@ -34,5 +33,13 @@ public class CustomerManager {
 
     public List<Customer> getAllCustomers() {
         return cutomerDAO.getAllCustomers();
+    }
+
+    public boolean createCustomer(Customer customer) {
+        return cutomerDAO.createCustomer(customer);
+    }
+
+    public List<Customer> getCustomerByName(String name) {
+        return cutomerDAO.getCustomerByName(name);
     }
 }

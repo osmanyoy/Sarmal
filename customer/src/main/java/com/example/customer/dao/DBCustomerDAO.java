@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBCustomerDAO implements ICutomerDAO{
+public class DBCustomerDAO extends AbstractCustomerDAO{
 
     @Autowired
     private ICustomerRepository customerRepository;
@@ -21,5 +21,19 @@ public class DBCustomerDAO implements ICutomerDAO{
             customerList.add(customer);
         }
         return customerList;
+    }
+
+    @Override
+    public boolean createCustomer(Customer customer) {
+        Customer save = customerRepository.save(customer);
+        if (save != null){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Customer> getCustomerByName(String name) {
+        return customerRepository.findAllByName(name);
     }
 }

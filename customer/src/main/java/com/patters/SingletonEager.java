@@ -3,7 +3,7 @@ package com.patters;
 /**
  * Created by Osman on 9.08.2017.
  */
-public enum SingletonEager {
+public enum SingletonEager{
     INSTANCE1("instance1");
 
     private String helloString;
