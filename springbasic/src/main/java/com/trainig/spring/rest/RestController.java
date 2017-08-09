@@ -1,6 +1,8 @@
 package com.trainig.spring.rest;
 
 import com.trainig.spring.AppProp;
+import com.trainig.spring.jpa.DBOperations;
+import com.trainig.spring.jpa.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -9,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 @org.springframework.web.bind.annotation.RestController
 public class RestController {
+
+    @Autowired
+    private DBOperations dbOperations;
 
     @Autowired
     @Qualifier("mevam")
@@ -56,6 +61,11 @@ public class RestController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String exHand(Exception ex){
         return "Error oluştu local";
+    }
+
+    @RequestMapping("/dbinsert")
+    public void insertDB(){
+        dbOperations.save(new Employee().setName("osman").setSurname("Yaycıoğlu"));
     }
 
 }
