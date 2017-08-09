@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
@@ -29,6 +30,30 @@ public class DatademoApplication implements ApplicationRunner {
         Employee employee = new Employee();
         employee.setName("osman");
         employee.setSurname("yay");
+        employee.setUsername("osman");
+        employee.setPassword("osman12");
+        PersonalInfo perInfo = new PersonalInfo();
+        perInfo.setMarriageYear(2005);
+        perInfo.setSpouseName("Nil");
+        perInfo.setEmployee(employee);
+        employee.setPersonalInfo(perInfo);
+
+        PersonalData personalData = new PersonalData();
+        personalData.setHeight(200);
+        personalData.setWeight(92);
+        personalData.setGender(EGender.MALE);
+
+        employee.setPersonalData(personalData);
+
+        Department department = new Department();
+        department.setDepartment("Test");
+        department.setDesc1("Test department");
+        employee.setDepartment(department);
+
+        List<Employee> employeeList = new ArrayList<>();
+        employeeList.add(employee);
+
+        department.setEmployees(employeeList);
 
         // employeeRepository.save(employee);
         employeeCRUD.save(employee);

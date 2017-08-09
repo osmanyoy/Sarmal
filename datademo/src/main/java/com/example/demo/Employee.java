@@ -21,6 +21,12 @@ public class Employee {
     @Column(table = "employee_credential")
     private String password;
 
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private PersonalInfo personalInfo;
+
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private Department department;
+
 
     @Embedded
     @AttributeOverrides({@AttributeOverride(column = @Column(name = "uzunluk"),name = "height")})
@@ -102,5 +108,21 @@ public class Employee {
     public void yazdiktanSonra(){
         password = new String(Base64.getDecoder().decode(password.getBytes()));
 
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public PersonalInfo getPersonalInfo() {
+        return personalInfo;
+    }
+
+    public void setPersonalInfo(PersonalInfo personalInfo) {
+        this.personalInfo = personalInfo;
     }
 }
