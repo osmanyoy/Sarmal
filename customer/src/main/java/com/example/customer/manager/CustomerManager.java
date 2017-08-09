@@ -3,6 +3,7 @@ package com.example.customer.manager;
 import com.example.customer.Customer;
 import com.example.customer.dao.ICutomerDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +15,7 @@ public class CustomerManager {
     private ECacheType cahceType;
 
     @Autowired
+    // @Qualifier("cutomerDAO")
     private ICutomerDAO cutomerDAO;
 
     @Autowired
