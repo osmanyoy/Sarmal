@@ -3,6 +3,7 @@ package com.example.customer.manager;
 import com.example.customer.dao.IRoleDAO;
 import com.example.customer.model.Customer;
 import com.example.customer.dao.ICutomerDAO;
+import com.example.customer.model.CustomerCredential;
 import com.example.customer.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,5 +55,10 @@ public class CustomerManager {
 
     public List<Role> getAllRoles(){
         return roleDAO.getAllRoles();
+    }
+
+    public CustomerCredential loadUserByUsernameWithUsername(String s) {
+        CustomerCredential customerCredential = cutomerDAO.getCustomerCredential(s);
+        return customerCredential;
     }
 }

@@ -1,0 +1,19 @@
+<code_scheme name="osman">
+  <codeStyleSettings language="JAVA">
+    <option name="KEEP_LINE_BREAKS" value="false" />
+    <option name="KEEP_FIRST_COLUMN_COMMENT" value="false" />
+    <option name="KEEP_CONTROL_STATEMENT_IN_ONE_LINE" value="false" />
+    <option name="CATCH_ON_NEW_LINE" value="true" />
+    <option name="FINALLY_ON_NEW_LINE" value="true" />
+    <option name="ALIGN_MULTILINE_CHAINED_METHODS" value="true" />
+    <option name="ALIGN_MULTILINE_PARAMETERS_IN_CALLS" value="true" />
+    <option name="ALIGN_MULTILINE_BINARY_OPERATION" value="true" />
+    <option name="ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION" value="true" />
+    <option name="ALIGN_GROUP_FIELD_DECLARATIONS" value="true" />
+    <option name="CALL_PARAMETERS_WRAP" value="2" />
+    <option name="METHOD_PARAMETERS_WRAP" value="2" />
+    <option name="METHOD_CALL_CHAIN_WRAP" value="2" />
+    <option name="ARRAY_INITIALIZER_WRAP" value="2" />
+    <option name="IF_BRACE_FORCE" value="3" />
+  </codeStyleSettings>
+</code_scheme>

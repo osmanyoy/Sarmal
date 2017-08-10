@@ -1,5 +1,7 @@
 package com.example.customer.model;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,7 +15,14 @@ public class CustomerCredential {
     private String username;
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
+    private static final BCryptPasswordEncoder be = new BCryptPasswordEncoder();
+
+    @PrePersist
+    public void prePer(){
+        password = be.encode(password);
+    }
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.REFRESH})
     private List<Role> roles;
 
     public String getUsername() {

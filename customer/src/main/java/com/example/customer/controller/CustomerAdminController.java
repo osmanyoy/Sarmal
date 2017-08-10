@@ -12,10 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+//@RequestMapping("/api")
 public class CustomerAdminController {
 
     @Autowired
     private CustomerManager customerManager;
+
+    @RequestMapping("/hello")
+    public String hello(){
+        return "Hello world";
+    }
 
     @RequestMapping(value = "/allcustomers", produces = {"application/json",
                                                          "application/xml"})
