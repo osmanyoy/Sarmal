@@ -1,12 +1,13 @@
 package com.example.demo;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Base64;
 
 @Entity
 @Table(name = "employee_tablosu",indexes = {@Index(unique = false,name = "myIndex",columnList = "isim")})
 @SecondaryTable(name = "employee_credential")
-public class Employee {
+public class Employee implements Serializable {
     @Id
     @GeneratedValue
     private long employeeId;
@@ -24,7 +25,7 @@ public class Employee {
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private PersonalInfo personalInfo;
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Department department;
 
 
@@ -124,5 +125,57 @@ public class Employee {
 
     public void setPersonalInfo(PersonalInfo personalInfo) {
         this.personalInfo = personalInfo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Employee employee = (Employee) o;
+
+        if (employeeId != employee.employeeId) {
+            return false;
+        }
+        if (age != employee.age) {
+            return false;
+        }
+        if (name != null ? !name.equals(employee.name) : employee.name != null) {
+            return false;
+        }
+        if (surname != null ? !surname.equals(employee.surname) : employee.surname != null) {
+            return false;
+        }
+        if (username != null ? !username.equals(employee.username) : employee.username != null) {
+            return false;
+        }
+        if (password != null ? !password.equals(employee.password) : employee.password != null) {
+            return false;
+        }
+        if (personalInfo != null ? !personalInfo.equals(employee.personalInfo) : employee.personalInfo != null) {
+            return false;
+        }
+        if (department != null ? !department.equals(employee.department) : employee.department != null) {
+            return false;
+        }
+        return personalData != null ? personalData.equals(employee.personalData) : employee.personalData == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (employeeId ^ (employeeId >>> 32));
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + age;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (personalInfo != null ? personalInfo.hashCode() : 0);
+        result = 31 * result + (department != null ? department.hashCode() : 0);
+        result = 31 * result + (personalData != null ? personalData.hashCode() : 0);
+        return result;
     }
 }

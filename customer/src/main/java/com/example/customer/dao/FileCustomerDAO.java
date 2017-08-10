@@ -1,6 +1,6 @@
 package com.example.customer.dao;
 
-import com.example.customer.Customer;
+import com.example.customer.model.Customer;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;

@@ -1,7 +1,9 @@
 package com.example.customer.manager;
 
-import com.example.customer.Customer;
+import com.example.customer.dao.IRoleDAO;
+import com.example.customer.model.Customer;
 import com.example.customer.dao.ICutomerDAO;
+import com.example.customer.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -16,6 +18,9 @@ public class CustomerManager {
     @Autowired
     // @Qualifier("cutomerDAO")
     private ICutomerDAO cutomerDAO;
+
+    @Autowired
+    private IRoleDAO roleDAO;
 
     @Autowired
     private CustomerCache customerCache;
@@ -41,5 +46,13 @@ public class CustomerManager {
 
     public List<Customer> getCustomerByName(String name) {
         return cutomerDAO.getCustomerByName(name);
+    }
+
+    public boolean createRole(Role role) {
+        return roleDAO.createRole(role);
+    }
+
+    public List<Role> getAllRoles(){
+        return roleDAO.getAllRoles();
     }
 }

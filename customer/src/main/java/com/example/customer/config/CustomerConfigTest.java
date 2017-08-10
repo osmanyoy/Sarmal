@@ -1,4 +1,4 @@
-package com.example.customer;
+package com.example.customer.config;
 
 import com.example.customer.dao.DBCustomerDAO;
 import com.example.customer.dao.FileCustomerDAO;

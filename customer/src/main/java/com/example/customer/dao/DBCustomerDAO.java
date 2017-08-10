@@ -1,7 +1,7 @@
 package com.example.customer.dao;
 
 
-import com.example.customer.Customer;
+import com.example.customer.model.Customer;
 import com.example.customer.repository.ICustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 

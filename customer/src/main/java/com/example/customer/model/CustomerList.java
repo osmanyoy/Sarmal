@@ -1,4 +1,6 @@
-package com.example.customer;
+package com.example.customer.model;
+
+import com.example.customer.model.Customer;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

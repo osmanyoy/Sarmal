@@ -1,6 +1,6 @@
 package com.example.customer.manager;
 
-import com.example.customer.Customer;
+import com.example.customer.model.Customer;
 
 import java.util.HashMap;
 import java.util.List;

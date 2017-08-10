@@ -1,6 +1,8 @@
-package com.example.customer;
+package com.example.customer.config;
 
+import com.example.customer.EDAOType;
 import com.example.customer.dao.DBCustomerDAO;
+import com.example.customer.dao.DBRoleDAO;
 import com.example.customer.dao.FileCustomerDAO;
 import com.example.customer.dao.ICutomerDAO;
 import com.example.customer.manager.CustomerCache;
@@ -36,6 +38,11 @@ public class CustomerConfig {
 
         }
         return new DBCustomerDAO();
+    }
+
+    @Bean
+    public DBRoleDAO dbRoleDAO(){
+        return new DBRoleDAO();
     }
 
     @Bean

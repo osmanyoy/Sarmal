@@ -16,6 +16,9 @@ public class DatademoApplication implements ApplicationRunner {
     private EmployeeRepository employeeRepository;
 
     @Autowired
+    private CustomRepository customRepository;
+
+    @Autowired
     private EmployeeCRUD employeeCRUD;
 
     public static void main(String[] args) {
@@ -56,7 +59,9 @@ public class DatademoApplication implements ApplicationRunner {
         department.setEmployees(employeeList);
 
         // employeeRepository.save(employee);
-        employeeCRUD.save(employee);
+        // employeeCRUD.save(employee);
+
+        customRepository.save(employee);
 
         List<Employee> listOfEmployees = employeeCRUD.findByName("osman");
         System.out.println(listOfEmployees);

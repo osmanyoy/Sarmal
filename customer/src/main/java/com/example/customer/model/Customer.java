@@ -1,13 +1,23 @@
-package com.example.customer;
+package com.example.customer.model;
 
-/**
- * Created by Osman on 7.08.2017.
- */
+
+import javax.persistence.*;
+
+@Entity
 public class Customer {
+    @Id
+    @GeneratedValue
     private long id;
     private String name;
     private String surname;
     private int age;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private CustomerCredential customerCredential;
+
+    public Customer(){
+
+    }
 
     public Customer(long l,
                     String s,
@@ -55,4 +65,14 @@ public class Customer {
     public void setId(long id) {
         this.id = id;
     }
+
+    public CustomerCredential getCustomerCredential() {
+        return customerCredential;
+    }
+
+    public void setCustomerCredential(CustomerCredential customerCredential) {
+        this.customerCredential = customerCredential;
+    }
+
+
 }

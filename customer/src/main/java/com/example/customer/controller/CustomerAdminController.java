@@ -1,15 +1,13 @@
 package com.example.customer.controller;
 
-import com.example.customer.Customer;
-import com.example.customer.CustomerList;
+import com.example.customer.model.Customer;
+import com.example.customer.model.CustomerList;
 import com.example.customer.manager.CustomerManager;
+import com.example.customer.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,7 +26,7 @@ public class CustomerAdminController {
     }
 
     @RequestMapping(value = "/createCustomer", method = RequestMethod.POST)
-    public ResponseEntity<?> createCustomer(Customer customer) {
+    public ResponseEntity<?> createCustomer(@RequestBody Customer customer) {
         if (customer == null) {
             return ResponseEntity.badRequest()
                                  .body(ErrorResponse.createErrorResponse(10,
@@ -40,10 +38,66 @@ public class CustomerAdminController {
                                                                          "Customer age 10 ile 120 arasında olmalı"));
 
         }
+        if (customer.getCustomerCredential() == null) {
+            return ResponseEntity.badRequest()
+                                 .body(ErrorResponse.createErrorResponse(13,
+                                                                         "Lütfen customer credential larını giriniz"));
+
+        }
+        if (customer.getCustomerCredential()
+                    .getRoles() == null) {
+            return ResponseEntity.badRequest()
+                                 .body(ErrorResponse.createErrorResponse(14,
+                                                                         "Lütfen customer role lerini giriniz"));
+
+        }
+
+        List<Role> roles = customer.getCustomerCredential()
+                                   .getRoles();
+
+        List<Role> allRoles = customerManager.getAllRoles();
+
+        first:
+        for (Role role : roles) {
+            if (allRoles != null) {
+                for (Role exitsRole : allRoles) {
+                    if (exitsRole.getRid() == role.getRid()){
+                        if (role.equals(exitsRole)) {
+                            continue first;
+                        } else {
+                            return ResponseEntity.badRequest()
+                                                 .body(ErrorResponse.createErrorResponse(15,
+                                                                                         "Role id başka bir role e ait"));
+                        }
+                    }
+                }
+            }
+            customerManager.createRole(role);
+        }
+
         boolean result = customerManager.createCustomer(customer);
         return ResponseEntity.ok(result);
-
     }
+
+
+    @RequestMapping(value = "/createRole", method = RequestMethod.POST)
+    public ResponseEntity<?> createCustomer(Role role) {
+        if (role == null) {
+            return ResponseEntity.badRequest()
+                                 .body(ErrorResponse.createErrorResponse(10,
+                                                                         "Role objesi null olamaz"));
+        }
+        if (role.getRole() == null || role.getRole()
+                                          .isEmpty()) {
+            return ResponseEntity.badRequest()
+                                 .body(ErrorResponse.createErrorResponse(12,
+                                                                         "Role ismi boş olamaz"));
+
+        }
+        boolean result = customerManager.createRole(role);
+        return ResponseEntity.ok(result);
+    }
+
 
     @RequestMapping("/getCustomerByName/{name}")
     public ResponseEntity<?> getCustomersByName(@PathVariable("name") String name) {
