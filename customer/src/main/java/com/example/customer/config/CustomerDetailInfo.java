@@ -18,17 +18,14 @@ import java.util.List;
 
 @Service
 public class CustomerDetailInfo implements UserDetailsService {
-
     @Autowired
     private CustomerManager customerManager;
-
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         CustomerCredential customerCredential = customerManager.loadUserByUsernameWithUsername(s);
         List<Role> roles = customerCredential.getRoles();
         List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
-        for (Role role:roles
-             ) {
+        for (Role role:roles) {
             SimpleGrantedAuthority aut = new SimpleGrantedAuthority(role.getRole());
             simpleGrantedAuthorities.add(aut);
         }
