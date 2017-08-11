@@ -2,14 +2,20 @@ package com.example.customer.model;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Customer {
     @Id
     @GeneratedValue
     private long id;
+    @Size(max = 30,min = 2)
     private String name;
     private String surname;
+    @Min(10)
+    @Max(120)
     private int age;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -68,8 +68,8 @@ public class AuthorizationServerOAuthConfig // extends OAuth2AuthorizationServer
                        "write",
                        "trust")
                .autoApprove(true).and()
-               .withClient("osman")
-               .secret("osman12")
+               .withClient("test")
+               .secret("test12")
                .authorizedGrantTypes("authorization_code",
                                      "refresh_token",
                                      "password",
