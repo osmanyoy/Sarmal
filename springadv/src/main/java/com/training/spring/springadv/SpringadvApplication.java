@@ -4,16 +4,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.Environment;
 import org.training.Person;
 
 import java.lang.reflect.Field;
 
 //@SpringBootApplication(scanBasePackages = {"org.training","com.training"})
 @SpringBootApplication
-public class SpringadvApplication {
+@ServletComponentScan
+public class SpringadvApplication implements ApplicationRunner{
 
     @Autowired
     private Logger logger ;
@@ -30,7 +35,10 @@ public class SpringadvApplication {
     @MyFirstAnno(defVal = 10, name = "Nil")
     private int intVal;
 
+    public static String[] arguments;
+
     public static void main(String[] args) throws IllegalAccessException, InstantiationException {
+        arguments = args;
         Class<SpringadvApplication> springadvApplicationClass = SpringadvApplication.class;
         SpringadvApplication springadvApplication = springadvApplicationClass.newInstance();
         Field[] declaredFields = springadvApplicationClass.getDeclaredFields();
@@ -56,5 +64,15 @@ public class SpringadvApplication {
     @Override
     public String toString() {
         return "SpringadvApplication{" + "intVal=" + intVal + '}';
+    }
+
+    @Autowired
+    private Environment environment;
+
+
+    @Override
+    public void run(ApplicationArguments applicationArguments) throws
+                                                               Exception {
+        System.getProperties().setProperty("info.test","test str");
     }
 }
