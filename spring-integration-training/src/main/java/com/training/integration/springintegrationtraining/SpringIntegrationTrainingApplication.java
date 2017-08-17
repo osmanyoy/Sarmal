@@ -16,6 +16,8 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
@@ -27,6 +29,7 @@ import java.util.concurrent.Future;
 @EnableIntegration
 @IntegrationComponentScan
 @EnableAsync
+@EnableScheduling
 public class SpringIntegrationTrainingApplication implements ApplicationRunner {
 
     @Autowired
@@ -62,7 +65,7 @@ public class SpringIntegrationTrainingApplication implements ApplicationRunner {
 
         Person person1 = new Person();
         person1.setName("osman");
-        person1.setAge(47);
+        person1.setAge(30);
         person1.setSurname("yay");
 
         ListenableFuture<String> start1 = asyncGateway.start(person1);
@@ -118,4 +121,9 @@ public class SpringIntegrationTrainingApplication implements ApplicationRunner {
         System.out.println(start2);
 
     }
+
+//    @Scheduled(fixedDelay = 1000)
+//    public void testScheduling(){
+//        System.out.println("Schedule : " + Thread.currentThread().getName());
+//    }
 }
