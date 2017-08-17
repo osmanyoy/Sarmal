@@ -6,12 +6,92 @@
        xmlns:int-http="http://www.springframework.org/schema/integration/http"
        xmlns:rabbit="http://www.springframework.org/schema/rabbit"
        xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+       xmlns:file="http://www.springframework.org/schema/integration/file"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
 		http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+        http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
     	http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
         http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd">
+
+    <int:gateway default-request-channel="firstChannel"
+                 service-interface="com.training.integration.springintegrationtraining.MyGateway">
+        <int:method name="start"/>
+    </int:gateway>
+
+    <task:executor id="executor2" queue-capacity="1000" pool-size="10" />
+
+    <int:channel id="asyncFirstChannel" >
+        <int:queue capacity="1000" />
+        <!--<int:dispatcher task-executor="executor2" />-->
+    </int:channel>
+
+    <int:gateway default-request-channel="asyncFirstChannel"
+                 service-interface="com.training.integration.springintegrationtraining.AsyncGateway">
+        <int:method name="start"/>
+    </int:gateway>
+
+    <int:service-activator input-channel="asyncFirstChannel" ref="consumerBean" method="handle" output-channel="subscribeChannel">
+        <int:poller task-executor="executor2" fixed-delay="1000" max-messages-per-poll="10" />
+    </int:service-activator>
+
+    <int:publish-subscribe-channel id="subscribeChannel" task-executor="executor2" />
+
+    <int:channel id="firstChannel"/>
+
+    <int:filter input-channel="firstChannel" output-channel="secondChannel" expression="payload.age > 40"/>
+
+    <int:channel id="secondChannel"/>
+
+    <bean id="consumerBean" class="com.training.integration.springintegrationtraining.FirstConsumer"/>
+
+    <int:service-activator input-channel="secondChannel" ref="consumerBean" method="handle"/>
+
+
+    <task:executor id="executor" pool-size="20" queue-capacity="1000"/>
+    <file:inbound-channel-adapter id="filesRead"
+                                  directory="file:${file.directory}/input"
+                                  filename-pattern="*.txt" auto-create-directory="true" auto-startup="true">
+
+        <int:poller id="poller" fixed-delay="5000">
+            <int:transactional transaction-manager="transactionManager" synchronization-factory="syncFactory" />
+        </int:poller>
+    </file:inbound-channel-adapter>
+
+    <bean id="transactionManager" class="org.springframework.integration.transaction.PseudoTransactionManager" />
+
+    <int:transaction-synchronization-factory id="syncFactory">
+        <int:after-commit expression="payload.delete()" channel="nullChannel"/>
+    </int:transaction-synchronization-factory>
+
+    <!--<file:file-to-string-transformer input-channel="filesRead" output-channel="afterReadChannel"/>-->
+    <!--<int:splitter input-channel="afterReadChannel" output-channel="lineQueueChannel" delimiters="\r\n"/>-->
+    <!--<int:channel id="afterReadChannel" />-->
+
+    <file:splitter input-channel="filesRead" output-channel="lineQueueChannel" >
+    </file:splitter>
+
+    <int:channel id="lineQueueChannel">
+        <int:queue capacity="1000"/>
+        <int:interceptors>
+            <int:wire-tap channel="loggingChannel"/>
+            <!--<bean class="com.training.integration.springintegrationtraining.MonitorBean" />-->
+        </int:interceptors>
+    </int:channel>
+
+    <int:logging-channel-adapter id="loggingChannel" log-full-message="true" logger-name="tapInbound"
+                                 level="INFO"/>
+
+    <bean id="transferBean" class="com.training.integration.springintegrationtraining.TransferToBean"/>
+
+    <int:transformer input-channel="lineQueueChannel" ref="transferBean" method="transferToPerson" output-channel="sendChannel">
+        <int:poller fixed-delay="100" max-messages-per-poll="100" task-executor="executor"/>
+    </int:transformer>
+
+    <int:publish-subscribe-channel id="sendChannel" task-executor="executor"/>
+
+
 </beans>
