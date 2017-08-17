@@ -4,6 +4,7 @@ public class Person {
     private String name;
     private String surname;
     private int age;
+    private long chainTime;
 
     public String getName() {
         return name;
@@ -32,5 +33,13 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" + "name='" + name + '\'' + ", surname='" + surname + '\'' + ", age=" + age + '}';
+    }
+
+    public long getChainTime() {
+        return chainTime;
+    }
+
+    public void setChainTime(long chainTime) {
+        this.chainTime = chainTime;
     }
 }

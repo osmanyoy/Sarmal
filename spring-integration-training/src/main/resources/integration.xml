@@ -51,7 +51,9 @@
     <int:service-activator input-channel="secondChannel" ref="consumerBean" method="handle"/>
 
 
+    <!--File Flow-->
     <task:executor id="executor" pool-size="20" queue-capacity="1000"/>
+
     <file:inbound-channel-adapter id="filesRead"
                                   directory="file:${file.directory}/input"
                                   filename-pattern="*.txt" auto-create-directory="true" auto-startup="true">
@@ -88,10 +90,23 @@
     <bean id="transferBean" class="com.training.integration.springintegrationtraining.TransferToBean"/>
 
     <int:transformer input-channel="lineQueueChannel" ref="transferBean" method="transferToPerson" output-channel="sendChannel">
-        <int:poller fixed-delay="100" max-messages-per-poll="100" task-executor="executor"/>
+        <int:poller fixed-delay="100" max-messages-per-poll="100" task-executor="executor2"/>
     </int:transformer>
 
-    <int:publish-subscribe-channel id="sendChannel" task-executor="executor"/>
+    <int:channel id="myChannel" />
+    <int:chain input-channel="myChannel">
+        <int:enricher>
+            <int:property name="chainTime" expression="T(System).currentTimeMillis()" />
+        </int:enricher>
+        <int:recipient-list-router >
+            <int:recipient channel="sendChannel" selector-expression="@decideRoute.decide(payload)" />
+            <int:recipient channel="sendChannel2" selector-expression="payload.age le 40" />
+        </int:recipient-list-router>
+    </int:chain>
+
+    <int:publish-subscribe-channel id="sendChannel" task-executor="executor2"/>
+
+    <int:publish-subscribe-channel id="sendChannel2" task-executor="executor2"/>
 
 
 </beans>
