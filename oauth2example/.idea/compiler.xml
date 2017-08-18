@@ -6,13 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="app-server" />
         <module name="auth-server" />
         <module name="oauth2example" />
+        <module name="resource-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="app-server" target="1.8" />
       <module name="auth-server" target="1.8" />
       <module name="oauth2example" target="1.5" />
+      <module name="resource-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
