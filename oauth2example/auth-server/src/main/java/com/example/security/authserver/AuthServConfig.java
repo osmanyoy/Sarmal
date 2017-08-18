@@ -21,8 +21,8 @@ public class AuthServConfig extends AuthorizationServerConfigurerAdapter {
         clients.inMemory()
                .withClient("client1")
                .secret("secret1")
-               .scopes("create contact",
-                       "personal info")
+               .scopes("createContact",
+                       "personalInfo")
                .autoApprove(false)
                .authorizedGrantTypes("authorization_code",
                                      "client_credential",

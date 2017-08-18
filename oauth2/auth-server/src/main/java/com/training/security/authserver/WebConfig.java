@@ -24,7 +24,9 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
             .authenticated();
 
 
-        http.formLogin()
+        http.csrf()
+            .disable()
+            .formLogin()
             .permitAll()
             .and()
             .requestMatchers()
