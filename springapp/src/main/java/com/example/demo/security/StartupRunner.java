@@ -3,6 +3,7 @@ package com.example.demo.security;
 import com.example.demo.integration.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Stream;
