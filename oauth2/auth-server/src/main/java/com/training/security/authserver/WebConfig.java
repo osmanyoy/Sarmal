@@ -22,5 +22,19 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .anyRequest()
             .authenticated();
+
+
+        http.formLogin()
+            .permitAll()
+            .and()
+            .requestMatchers()
+            .antMatchers("/",
+                         "/login",
+                         "/oauth/authorize",
+                         "/oauth/confirm_access")
+            .and()
+            .authorizeRequests()
+            .anyRequest()
+            .authenticated();
     }
 }

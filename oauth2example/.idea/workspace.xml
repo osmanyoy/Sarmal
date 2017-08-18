@@ -39,51 +39,61 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app-server/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="34" column="30" lean-forward="false" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AppServerApplicationTests.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app-server/src/test/java/com/example/security/appserver/AppServerApplicationTests.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="AppServerApplication.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app-server/src/main/java/com/example/security/appserver/AppServerApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <state relative-caret-position="363">
+              <caret line="30" column="31" lean-forward="false" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.properties" pinned="false" current-in-tab="true">
+      <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app-server/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="198">
-              <caret line="6" column="28" lean-forward="false" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="28" />
+              <caret line="6" column="52" lean-forward="false" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="52" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OAuth2RestTemplate.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/oauth/spring-security-oauth2/2.0.14.RELEASE/spring-security-oauth2-2.0.14.RELEASE.jar!/org/springframework/security/oauth2/client/OAuth2RestTemplate.class">
+      <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/auth-server/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="47" column="98" lean-forward="false" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="98" />
+            <state relative-caret-position="66">
+              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WebSecConf.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/auth-server/src/main/java/com/example/security/authserver/WebSecConf.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="29" column="42" lean-forward="false" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="12" column="40" lean-forward="false" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AuthServConfig.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/auth-server/src/main/java/com/example/security/authserver/AuthServConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="518">
+              <caret line="29" column="5" lean-forward="false" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -121,16 +131,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/auth-server/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="37" column="18" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -149,19 +149,19 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/auth-server/pom.xml" />
-        <option value="$PROJECT_DIR$/auth-server/src/main/java/com/example/security/authserver/WebSecConf.java" />
         <option value="$PROJECT_DIR$/auth-server/src/main/java/com/example/security/authserver/AuthServConfig.java" />
         <option value="$PROJECT_DIR$/auth-server/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/auth-server/src/main/java/com/example/security/authserver/AuthServerApplication.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/resource-server/pom.xml" />
         <option value="$PROJECT_DIR$/resource-server/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/resource-server/src/main/java/com/example/security/resourceserver/Person.java" />
         <option value="$PROJECT_DIR$/resource-server/src/main/java/com/example/security/resourceserver/ResourceServerApplication.java" />
         <option value="$PROJECT_DIR$/app-server/pom.xml" />
         <option value="$PROJECT_DIR$/app-server/src/main/java/com/example/security/appserver/Person.java" />
-        <option value="$PROJECT_DIR$/app-server/src/main/java/com/example/security/appserver/AppServerApplication.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/app-server/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/app-server/src/main/java/com/example/security/appserver/AppServerApplication.java" />
+        <option value="$PROJECT_DIR$/auth-server/src/main/java/com/example/security/authserver/WebSecConf.java" />
       </list>
     </option>
   </component>
@@ -256,6 +256,68 @@
               <item name="oauth2example" type="b2602c69:ProjectViewProjectNode" />
               <item name="oauth2example" type="462c0819:PsiDirectoryNode" />
               <item name="auth-server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="oauth2example" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oauth2example" type="462c0819:PsiDirectoryNode" />
+              <item name="auth-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="oauth2example" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oauth2example" type="462c0819:PsiDirectoryNode" />
+              <item name="auth-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="oauth2example" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oauth2example" type="462c0819:PsiDirectoryNode" />
+              <item name="auth-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="oauth2example" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oauth2example" type="462c0819:PsiDirectoryNode" />
+              <item name="auth-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="authserver" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="oauth2example" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oauth2example" type="462c0819:PsiDirectoryNode" />
+              <item name="auth-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="oauth2example" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oauth2example" type="462c0819:PsiDirectoryNode" />
+              <item name="auth-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="oauth2example" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oauth2example" type="462c0819:PsiDirectoryNode" />
+              <item name="auth-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="oauth2example" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oauth2example" type="462c0819:PsiDirectoryNode" />
+              <item name="auth-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="authserver" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="oauth2example" type="b2602c69:ProjectViewProjectNode" />
@@ -357,7 +419,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.AppServerApplication">
+  <component name="RunManager" selected="Spring Boot.ResourceServerApplication">
     <configuration name="AppServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -375,6 +437,18 @@
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.security.authserver.AuthServerApplication" />
       <option name="SHOW_IN_DASHBOARD" value="true" />
       <module name="auth-server" />
+      <envs />
+    </configuration>
+    <configuration name="ResourceServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.example.security.resourceserver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.security.resourceserver.ResourceServerApplication" />
+      <option name="SHOW_IN_DASHBOARD" value="true" />
+      <module name="resource-server" />
       <envs />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -464,13 +538,15 @@
       <properties />
       <listeners />
     </configuration>
-    <list size="2">
+    <list size="3">
       <item index="0" class="java.lang.String" itemvalue="Spring Boot.AuthServerApplication" />
       <item index="1" class="java.lang.String" itemvalue="Spring Boot.AppServerApplication" />
+      <item index="2" class="java.lang.String" itemvalue="Spring Boot.ResourceServerApplication" />
     </list>
     <recent_temporary>
-      <list size="1">
+      <list size="2">
         <item index="0" class="java.lang.String" itemvalue="Spring Boot.AppServerApplication" />
+        <item index="1" class="java.lang.String" itemvalue="Spring Boot.ResourceServerApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -487,12 +563,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1503042441313</updated>
-      <workItem from="1503042445461" duration="5978000" />
+      <workItem from="1503042445461" duration="6998000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5978000" />
+    <option name="totallyTimeSpent" value="6998000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1911" y="-9" width="1938" height="1098" extended-state="6" />
@@ -504,7 +580,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Run Dashboard" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30942184" sideWeight="0.5" order="-1" side_tool="false" content_ui="combo" />
+      <window_info id="Run Dashboard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30942184" sideWeight="0.5" order="-1" side_tool="false" content_ui="combo" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -569,13 +645,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app-server/src/main/java/com/example/security/appserver/AppServerApplication.java</url>
-          <line>24</line>
-          <properties />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="1" />
     </breakpoint-manager>
     <watches-manager />
@@ -589,46 +658,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/auth-server/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/auth-server/src/main/java/com/example/security/authserver/WebSecConf.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="9" column="41" lean-forward="false" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/auth-server/src/main/java/com/example/security/authserver/AuthServConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="693">
-          <caret line="29" column="5" lean-forward="false" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/auth-server/src/main/java/com/example/security/authserver/AuthServerApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="429">
           <caret line="27" column="23" lean-forward="false" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="12" column="31" lean-forward="false" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
           <folding />
         </state>
       </provider>
@@ -673,17 +706,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resource-server/src/main/java/com/example/security/resourceserver/ResourceServerApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#747#748#0" expanded="true" />
-            <element signature="e#765#766#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resource-server/src/main/java/com/example/security/resourceserver/Person.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
@@ -712,6 +734,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/auth-server/src/main/java/com/example/security/authserver/AuthServConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="518">
+          <caret line="29" column="5" lean-forward="false" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="12" column="40" lean-forward="false" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resource-server/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
@@ -720,10 +758,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resource-server/src/main/java/com/example/security/resourceserver/ResourceServerApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#747#748#0" expanded="true" />
+            <element signature="e#765#766#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app-server/src/main/java/com/example/security/appserver/AppServerApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state relative-caret-position="363">
+          <caret line="30" column="31" lean-forward="false" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="31" />
           <folding />
         </state>
       </provider>
@@ -731,7 +780,23 @@
     <entry file="file://$PROJECT_DIR$/app-server/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
-          <caret line="6" column="28" lean-forward="false" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="28" />
+          <caret line="6" column="52" lean-forward="false" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auth-server/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/auth-server/src/main/java/com/example/security/authserver/WebSecConf.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="29" column="42" lean-forward="false" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="42" />
           <folding />
         </state>
       </provider>

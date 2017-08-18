@@ -11,5 +11,6 @@
     <modules>
         <module>auth-server</module>
         <module>resource-server</module>
+        <module>app-server</module>
     </modules>
 </project>

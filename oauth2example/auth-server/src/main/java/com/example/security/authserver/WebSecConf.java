@@ -9,13 +9,26 @@ public class WebSecConf extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws
                                                 Exception {
+//        http.formLogin()
+//            .permitAll()
+//            .and()
+//            .authorizeRequests()
+//            .antMatchers("/login",
+//                         "/oauth/authorize")
+//            .anonymous()
+//            .and()
+//            .authorizeRequests()
+//            .anyRequest()
+//            .authenticated();
+
         http.formLogin()
             .permitAll()
             .and()
-            .authorizeRequests()
-            .antMatchers("/login",
-                         "/oauth/authorize")
-            .anonymous()
+            .requestMatchers()
+            .antMatchers("/",
+                         "/login",
+                         "/oauth/authorize",
+                         "/oauth/confirm_access")
             .and()
             .authorizeRequests()
             .anyRequest()

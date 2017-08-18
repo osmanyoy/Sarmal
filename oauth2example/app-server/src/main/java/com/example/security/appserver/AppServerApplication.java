@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @EnableOAuth2Client
+@RestController
 public class AppServerApplication {
 
     @Autowired
