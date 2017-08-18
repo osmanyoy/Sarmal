@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class ResourceServerApplication {
 
 	@PreAuthorize("#oauth2.hasScope('personalInfo')")
-    @RequestMapping("/perInfo")
-	public Person person(){
+    @RequestMapping("/merInfo")
+	public String person(){
 		Person person = new Person();
 		person.setAge(100);
 		person.setName("osman");
 		person.setSurname("yaycioglu");
-		return person;
+		return person.toString();
 	}
 
 	@RequestMapping("/createContact")

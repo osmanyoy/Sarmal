@@ -30,15 +30,23 @@ public class AppServerApplication {
 
     @RequestMapping("/promotion")
     public String promot() {
-        Person person =  auth2RestTemplate.getForObject("http://127.0.0.1:9000/perInfo",
-                                       Person.class);
+        Person person = auth2RestTemplate.getForObject("http://127.0.0.1:9000/perInfo",
+                                                       Person.class);
 
-        if (person.getAge() > 25){
+        if (person.getAge() > 25) {
             return "promotion platinium paket";
         } else {
             return "promotion genç Turkcell";
         }
 
+    }
+
+    @RequestMapping("/promotion2")
+    public String promot2() {
+        String person = auth2RestTemplate.getForObject("http://127.0.0.1:9001/merInfo",
+                                                       String.class);
+
+        return person;
     }
 
 
