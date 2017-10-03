@@ -1,4 +1,4 @@
-package com.allianz.training;
+package com.siemens.amqp.rabbittest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringtrainingApplicationTests {
+public class RabbittestApplicationTests {
 
 	@Test
 	public void contextLoads() {

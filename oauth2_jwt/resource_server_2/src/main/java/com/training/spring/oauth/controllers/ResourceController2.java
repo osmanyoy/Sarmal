@@ -1,6 +1,7 @@
 package com.training.spring.oauth.controllers;
 
 import com.training.spring.oauth.entities.Order;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +16,7 @@ public class ResourceController2 {
     }
 
     @GetMapping("/order")
+    @PreAuthorize("#oauth2.hasScope('write')")
     public Order getOrder() {
         Order order = new Order();
         order.setOrderID(UUID.randomUUID().toString());

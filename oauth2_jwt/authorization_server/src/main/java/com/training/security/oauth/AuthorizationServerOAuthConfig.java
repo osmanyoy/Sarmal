@@ -10,6 +10,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.approval.ApprovalStore;
+import org.springframework.security.oauth2.provider.approval.InMemoryApprovalStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
@@ -43,27 +45,38 @@ public class AuthorizationServerOAuthConfig extends AuthorizationServerConfigure
         return new JwtTokenStore(tokenConverter());
     }
 
+    public ApprovalStore approvalStore() {
+        return new InMemoryApprovalStore();
+    }
+
     @Override
-    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws
+                                                                             Exception {
         oauthServer.tokenKeyAccess("isAnonymous() || hasRole('ROLE_TRUSTED_CLIENT') || permitAll()")
                    .checkTokenAccess("hasRole('TRUSTED_CLIENT')");
     }
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws
+                                                                            Exception {
         endpoints.authenticationManager(authenticationManager)
                  .tokenStore(tokenStore())
-                 .accessTokenConverter(tokenConverter());
+                 .accessTokenConverter(tokenConverter())
+                 .approvalStore(approvalStore());
     }
 
     @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+    public void configure(ClientDetailsServiceConfigurer clients) throws
+                                                                  Exception {
         clients.inMemory()
-                .withClient("client")
-                .secret("secret")
-                .authorizedGrantTypes("authorization_code", "refresh_token", "password", "client_credentials")
-                .authorities("ROLE_USER")
-                .scopes("read");
+               .withClient("client")
+               .secret("secret")
+               .authorizedGrantTypes("authorization_code",
+                                     "refresh_token",
+                                     "password",
+                                     "client_credentials")
+               .authorities("ROLE_USER")
+               .scopes("read","write","osmanKahve");
     }
 
 }

@@ -40,12 +40,12 @@ public class SessionHandler extends StompSessionHandlerAdapter {
 	                           final StompHeaders connectedHeaders) {
 		session.subscribe("/topic/greetings",
 		                  new FrameHandler());
-		try {
-			session.send("/app/hello",
-			             new Greeting("Spring"));
-		} catch (final Throwable t) {
-			this.failure.set(t);
-		}
+//		try {
+//			session.send("/app/hello",
+//			             new Greeting("Spring"));
+//		} catch (final Throwable t) {
+//			this.failure.set(t);
+//		}
 	}
 
 }
